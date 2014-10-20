@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<array>
+	<dict>
+		<key>DefaultValue</key>
+		<string>en-ru</string>
+		<key>Key</key>
+		<string>myLangs</string>
+		<key>Title</key>
+		<string>Languages</string>
+		<key>Titles</key>
+		<array>
+			<string>English to Russian</string>
+			<string>English to German</string>
+			<string>English to French</string>
+			<string>English to Italian</string>
+			<string>English to Spanish</string>
+			<string>German to Russian</string>
+			<string>German to English</string>
+			<string>French to Russian</string>
+			<string>French to English</string>
+			<string>Italian to Russian</string>
+			<string>Italian to English</string>
+			<string>Spanish to Russian</string>
+			<string>Spanish to English</string>
+		</array>
+		<key>Type</key>
+		<string>PopUpButton</string>
+		<key>Values</key>
+		<array>
+			<string>en-ru</string>
+			<string>en-de</string>
+			<string>en-fr</string>
+			<string>en-it</string>
+			<string>en-es</string>
+			<string>de-ru</string>
+			<string>de-en</string>
+			<string>fr-ru</string>
+			<string>fr-en</string>
+			<string>it-ru</string>
+			<string>it-en</string>
+			<string>es-ru</string>
+			<string>es-en</string>
+		</array>
+	</dict>
+	<dict>
+		<key>DefaultValue</key>
+		<string>null</string>
+		<key>Key</key>
+		<string>myShortcut</string>
+		<key>Title</key>
+		<string>Keyboard Shortcuts</string>
+		<key>Titles</key>
+		<array>
+			<string>None</string>
+			<string>T</string>
+			<string>Alt + T</string>
+			<string>Ctrl + T</string>
+			<string>Cmd + Shift</string>
+			<string>Alt + Shift</string>
+			<string>Ctrl + Shift</string>
+			<string>Shift</string>
+		</array>
+		<key>Type</key>
+		<string>PopUpButton</string>
+		<key>Values</key>
+		<array>
+			<string>Null</string>
+			<string>T</string>
+			<string>AltT</string>
+			<string>CtrlT</string>
+			<string>CmdShift</string>
+			<string>AltShift</string>
+			<string>CtrlShift</string>
+			<string>Shift</string>
+		</array>
+	</dict>
+</array>
+</plist>

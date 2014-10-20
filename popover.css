@@ -1,0 +1,38 @@
+body {
+    margin: 0;
+    padding 0;
+    -webkit-box-sizing: border-box;
+}
+p {
+    color: black;
+    font-family: sans-serif;
+    font-size: 14px;
+    line-height: 1.4em;
+}
+#first, #second {
+    -webkit-box-sizing: border-box;
+    border-bottom: 1px rgba(0, 0, 0, .15) solid;
+    margin: 0;
+    padding: 0 13px 0 13px;
+}
+#div_in_law {
+    margin: 0;
+    padding: 0 13px 0 13px;
+}
+span.pos {
+    font-style: italic;
+    color: #777;
+}
+#div_in_lawp {
+    color: #333;
+    font-style: italic;
+    text-align: center;
+}
+#div_in_lawp a, #div_in_lawp a:hover, #div_in_lawp a:visited {
+    text-decoration: none;
+    color: #333;
+    border-bottom: 1px #999 dashed;
+}
+.ya {
+    color: #ff0000;
+}

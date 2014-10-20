@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="popover.css"></link>
+</head>
+<body>
+<section>
+    <div id="first"><p id="firstp"></p></div>
+    <div id="second"><p id="secondp"></p></div>
+    <div id="div_in_law"><p id="div_in_lawp"></p></div>
+</section>
+</body>
+<script>
+var firstp = document.getElementById('firstp'),
+    secondp = document.getElementById('secondp'),
+    div_in_lawp = document.getElementById('div_in_lawp'),
+    sl_response, // JSON like an Object
+    sll, // It's length
+    slltr = [],
+    xhr_url,
+    key_sl = 'dict.1.1.20140812T230854Z.d35809c3f94bd35f.a96743e1138654c4539b7067ffea7f4b0ac67e09',
+    key_tr = 'trnsl.1.1.20140605T150937Z.2e861a984ef314e9.70a7361486777e017210e011d367e5d001f8c2bb',
+    xhr = new XMLHttpRequest();
+    myBody = document.getElementsByTagName('body')[0];
+function copyrightLang(langs) {
+    if (langs.slice(3, 5) === 'ru') {
+        return 'Реализовано с помощью сервисов «<a href="http://api.yandex.ru/dictionary/">API&nbsp;„<span class="ya">Я</span>ндекс.Словарь“</a>» и&nbsp;«<a href="http://translate.yandex.ru"><span class="ya">Я</span>ндекс.Перевод</a>»'
+    } else {
+        return 'Powered&nbsp;by&nbsp;<a href="http://api.yandex.ru/dictionary/"><span class="ya">Y</span>andex.Dictionary</a> and&nbsp;<a href="http://translate.yandex.ru"><span class="ya">Y</span>andex.Translate</a>';
+    }   
+}
+function xhrListener0() {
+    secondp.innerHTML = '';
+    sl_response = JSON.parse(xhr.responseText);
+    sll = sl_response.def.length; 
+    for (i=0; i<sll; i++) {
+        slltr[i] = sl_response.def[i].tr.length;	
+    }
+    for (i=0; i<sll; i++) {
+        secondp.innerHTML += '<span class="pos">' + sl_response.def[i].pos + '</span><br/>';
+        for (j=0; j<=slltr[i]-1; j++) {
+            if (j !== slltr[i]-1) {secondp.innerHTML += sl_response.def[i].tr[j].text + ', ';
+            } else {secondp.innerHTML += sl_response.def[i].tr[j].text + '<br/><br/>';}
+        }
+    }
+    if (sl_response.def.length === 0) {secondp.innerHTML = firstp.innerHTML};
+    if (myBody.offsetHeight < 400) {
+        safari.extension.popovers[0].height = document.getElementsByTagName('body')[0].offsetHeight + 30;
+    } else {
+        safari.extension.popovers[0].height = 400;
+    }
+    safari.extension.toolbarItems[0].showPopover();
+}
+function xhrListener1() {
+    secondp.innerHTML = xhr.responseText;
+    if (myBody.offsetHeight < 500) {
+
+        safari.extension.popovers[0].height = document.getElementsByTagName('body')[0].offsetHeight + 30;
+    } else {
+        safari.extension.popovers[0].height = 500;
+    }
+    safari.extension.toolbarItems[0].showPopover();
+}
+function getSlovo(message) {
+    firstp.innerHTML = message;
+    div_in_lawp.innerHTML = copyrightLang(safari.extension.settings.myLangs);
+    xhr.onload = xhrListener0;
+    xhr_url = 'https://dictionary.yandex.net/api/v1/dicservice.json/lookup?' +
+              'key=' + key_sl +
+              '&lang=' + safari.extension.settings.myLangs +
+              '&text=' + message.trim();
+    xhr.open('get', xhr_url, true);
+    xhr.send();
+}
+function getMnogoSlov(message) {
+    firstp.innerHTML = message;
+    div_in_lawp.innerHTML = copyrightLang(safari.extension.settings.myLangs);
+    xhr.onload = xhrListener1;
+    xhr_url = 'https://translate.yandex.net/api/v1.5/tr/translate?' +
+              'key=' + key_tr +
+              '&text=' + encodeURIComponent(message) +
+              '&lang=' + safari.extension.settings.myLangs +
+              '&format=plain';
+    xhr.open('get', xhr_url, true);
+    xhr.send();
+}
+function myEventsHandler(event) {
+    if (event.name === 'selectedText') {
+        if (event.message.trim().indexOf(' ') === -1) {
+            getSlovo(event.message);
+        } else {
+            getMnogoSlov(event.message);
+        }
+    }
+}
+safari.application.addEventListener('message', myEventsHandler,  false);
+</script>
+</html>

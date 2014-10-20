@@ -1,0 +1,14 @@
+<script>
+function myEventsHandler(event) {
+    if (event.command === 'myToolbarItemClicked' || event.command === 'myContMenuItemClicked') {
+        safari.application.activeBrowserWindow.activeTab.page.dispatchMessage('myToolbarItemClicked');
+    }
+    if (event.name === 'pressedKey') {
+        if (event.message === safari.extension.settings.myShortcut) {
+            safari.application.activeBrowserWindow.activeTab.page.dispatchMessage('pressedKeyMatches');
+        }
+    }
+}
+safari.application.addEventListener('command', myEventsHandler, false);
+safari.application.addEventListener('message', myEventsHandler, false);
+</script>
